@@ -1,87 +1,86 @@
-\section{Chapter 9-10}
-    \subsection{Sequencing}
+\subsection{Sequencing}
+\begin{tabular}{| c | c |}
+    \hline
+    $t_{pd}$ & Logic Prop. Delay \\
+    \hline
+    $t_{cd}$ & Logic Cont. Delay \\
+    \hline
+    $t_{pcq}$ & Latch/Flop Clk $\xrightarrow{}$ Q Prop. Delay \\
+    \hline
+    $t_{ccq}$ & Latch/Flop Clk $\xrightarrow{}$ Q Cont. Delay \\
+    \hline
+    $t_{pdq}$ & Latch D $\xrightarrow{}$ Q Prop. Delay \\
+    \hline
+    $t_{ccq}$ & Latch D $\xrightarrow{}$ Q Cont. Delay \\
+    \hline
+    $t_{setup}$ & Latch/Flop Setup Time \\
+    \hline
+    $t_{hold}$ & Latch/Flop Hold Time \\
+    \hline
+\end{tabular}
+    \subsubsection{Max Delay}
     \begin{tabular}{| c | c |}
         \hline
-        $t_{pd}$ & Logic Prop. Delay \\
+        Flip-Flops & $t_{pd} \leq T_c - (t_{setup} + t_{pcq})$ \\
         \hline
-        $t_{cd}$ & Logic Cont. Delay \\
+        2-Phase Latches & $t_{pd} = t_{pd1} + t_{pd2} \leq T_c - (2t_{pdq})$ \\
         \hline
-        $t_{pcq}$ & Latch/Flop Clk $\xrightarrow{}$ Q Prop. Delay \\
-        \hline
-        $t_{ccq}$ & Latch/Flop Clk $\xrightarrow{}$ Q Cont. Delay \\
-        \hline
-        $t_{pdq}$ & Latch D $\xrightarrow{}$ Q Prop. Delay \\
-        \hline
-        $t_{ccq}$ & Latch D $\xrightarrow{}$ Q Cont. Delay \\
-        \hline
-        $t_{setup}$ & Latch/Flop Setup Time \\
-        \hline
-        $t_{hold}$ & Latch/Flop Hold Time \\
+        Pulsed Latches & $t_pd \leq T_c - \text{max}\left( t_{pdq}, t_{pcq} + t_{setup} - t_{pw}\right)$ \\
         \hline
     \end{tabular}
-        \subsubsection{Max Delay}
-        \begin{tabular}{| c | c |}
-            \hline
-            Flip-Flops & $t_{pd} \leq T_c - (t_{setup} + t_{pcq})$ \\
-            \hline
-            2-Phase Latches & $t_{pd} = t_{pd1} + t_{pd2} \leq T_c - (2t_{pdq})$ \\
-            \hline
-            Pulsed Latches & $t_pd \leq T_c - \text{max}\left( t_{pdq}, t_{pcq} + t_{setup} - t_{pw}\right)$ \\
-            \hline
-        \end{tabular}
 
-        \subsubsection{Min Delay}
-        \begin{tabular}{| c | c |}
-            \hline
-            Flip-Flops & $t_{cd} \geq t_{hold} - t_{ccq}$ \\
-            \hline
-            2-Phase Latches & $t_{cd1},t_{cd2} \geq t_{hold} - t_{ccq} - t_{nonoverlap}$ \\
-            \hline
-            Pulsed Latches & $t_{cd} \geq t_{hold} - t_{ccq} + t_{pw}$ \\
-            \hline
-        \end{tabular}
+    \subsubsection{Min Delay}
+    \begin{tabular}{| c | c |}
+        \hline
+        Flip-Flops & $t_{cd} \geq t_{hold} - t_{ccq}$ \\
+        \hline
+        2-Phase Latches & $t_{cd1},t_{cd2} \geq t_{hold} - t_{ccq} - t_{nonoverlap}$ \\
+        \hline
+        Pulsed Latches & $t_{cd} \geq t_{hold} - t_{ccq} + t_{pw}$ \\
+        \hline
+    \end{tabular}
 
-        \subsubsection{Time Borrowing}
-        \begin{tabular}{| c | c |}
-            \hline
-            Flip-Flops & $0$ \\
-            \hline
-            2-Phase Latches & $t_{borrow} \leq \frac{T_c}{2} - (t_{setup} + t_{nonoverlap})$ \\
-            \hline
-            Pulsed Latches & $t_{borrow} \leq t_{pw} - t_{setup}$ \\
-            \hline
-        \end{tabular}
+    \subsubsection{Time Borrowing}
+    \begin{tabular}{| c | c |}
+        \hline
+        Flip-Flops & $0$ \\
+        \hline
+        2-Phase Latches & $t_{borrow} \leq \frac{T_c}{2} - (t_{setup} + t_{nonoverlap})$ \\
+        \hline
+        Pulsed Latches & $t_{borrow} \leq t_{pw} - t_{setup}$ \\
+        \hline
+    \end{tabular}
 
-        \subsubsection{Clock Skew}
-        \begin{tabular}{| c | c |}
-            \hline
-            \multirow{2}{4em}{Flip-Flops} & $t_{pd} \leq T_c - (t_{setup} + t_{pcq} + t_{skew})$ \\
-            & $t_{cd} \geq t_{hold} - t_{ccq} + t_{skew}$\\
-            \hline
-            \multirow{3}{4em}{2-Phase Latches} & $t_{pd} = t_{pd1} + t_{pd2} \leq T_c - (2t_{pdq})$ \\
-            & $t_{cd1},t_{cd2} \geq t_{hold} - t_{ccq} - t_{nonoverlap} + t_{skew}$\\
-            & $t_{borrow} \leq \frac{T_c}{2} - (t_{setup} + t_{nonoverlap} + t_{skew})$\\
-            \hline
-            \multirow{3}{4em}{Pulsed Latches} & $t_pd \leq T_c - \text{max}\left( t_{pdq}, t_{pcq} + t_{setup} - t_{pw} + t_{skew}\right)$ \\
-            & $t_{cd} \geq t_{hold} - t_{ccq} + t_{pw} + t_{skew}$ \\
-            & $t_{borrow} \leq t_{pw} - (t_{setup} +t_{skew})$\\
-            \hline
-        \end{tabular}
-    \subsection{Wave Pipelining}
-        \subsubsection{Probability of Metastability}
-        \begin{tabular}{| p{0.11\linewidth} | p{0.79\linewidth} |}
-            \hline
-            $t$ & Required decision time, clock to stable output \\
-            \hline
-            $\tau_m$ & Time constant of the rate of decay of metastability \\
-            \hline
-            $T_w$ & Effective size of metastability window related to $t_{setup}$ + $t_{hold}$ of DFF \\
-            \hline
-            $f_{clock}$, $f_{data}$ & Asynchronous to clock \\
-            \hline
-            MTBF & Mean time between failure\\
-            \hline
-        \end{tabular}
+    \subsubsection{Clock Skew}
+    \begin{tabular}{| c | c |}
+        \hline
+        \multirow{2}{4em}{Flip-Flops} & $t_{pd} \leq T_c - (t_{setup} + t_{pcq} + t_{skew})$ \\
+        & $t_{cd} \geq t_{hold} - t_{ccq} + t_{skew}$\\
+        \hline
+        \multirow{3}{4em}{2-Phase Latches} & $t_{pd} = t_{pd1} + t_{pd2} \leq T_c - (2t_{pdq})$ \\
+        & $t_{cd1},t_{cd2} \geq t_{hold} - t_{ccq} - t_{nonoverlap} + t_{skew}$\\
+        & $t_{borrow} \leq \frac{T_c}{2} - (t_{setup} + t_{nonoverlap} + t_{skew})$\\
+        \hline
+        \multirow{3}{4em}{Pulsed Latches} & $t_pd \leq T_c - \text{max}\left( t_{pdq}, t_{pcq} + t_{setup} - t_{pw} + t_{skew}\right)$ \\
+        & $t_{cd} \geq t_{hold} - t_{ccq} + t_{pw} + t_{skew}$ \\
+        & $t_{borrow} \leq t_{pw} - (t_{setup} +t_{skew})$\\
+        \hline
+    \end{tabular}
+\subsection{Wave Pipelining}
+    \subsubsection{Probability of Metastability}
+    \begin{tabular}{| p{0.11\linewidth} | p{0.79\linewidth} |}
+        \hline
+        $t$ & Required decision time, clock to stable output \\
+        \hline
+        $\tau_m$ & Time constant of the rate of decay of metastability \\
+        \hline
+        $T_w$ & Effective size of metastability window related to $t_{setup}$ + $t_{hold}$ of DFF \\
+        \hline
+        $f_{clock}$, $f_{data}$ & Asynchronous to clock \\
+        \hline
+        MTBF & Mean time between failure\\
+        \hline
+    \end{tabular}
 
-        A simple model:
-        $$\text{MTBF} = \frac{e^{\frac{t}{\tau_m}}}{T_w f_{clock} f_{data}}$$
+    A simple model:
+    $$\text{MTBF} = \frac{e^{\frac{t}{\tau_m}}}{T_w f_{clock} f_{data}}$$
