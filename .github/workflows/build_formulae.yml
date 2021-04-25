@@ -31,12 +31,14 @@ jobs:
         with:
           root_file: |
             ECE403.tex
+            ECE486.tex
             AllCourse.tex
       - name: Publish PDF files to latest release
         uses: softprops/action-gh-release@v1
         with:
           files: | 
             ECE403.pdf
+            ECE486.pdf
             AllCourse.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
