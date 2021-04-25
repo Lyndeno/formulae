@@ -3,6 +3,7 @@
 \LoadClass{article}
 
 \setlength\parindent{0pt}
+\setlength\itemsep{0em}
 
 \setlength{\belowdisplayskip}{0pt} 
 \setlength{\belowdisplayshortskip}{0pt}
