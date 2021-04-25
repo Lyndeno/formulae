@@ -1,0 +1,52 @@
+\subsection{Impulse Response and Transfer Function for Multipath Fading Channels}
+Complex low-pass time-variant impulse response (input delay-spread function) for channel with N distinct propagation paths:
+\begin{equation}
+    h(\tau,t) = \sum_{k=1}^{N(t)} \rho_k(t) e^{j \phi_k(t)} \delta(\tau - \tau_k(t))
+\end{equation}
+
+Time variant transfer function of channel:
+\begin{gather}
+    H(f,t) = F_\tau [h(\tau,t)] = \int_{-\infty}^\infty h(\tau,t) e^{-j2 \pi f \tau} d\tau \\
+    h(\tau,t) = F_\tau [H(f,t)] = \int_{-\infty}^\infty H(f,t) e^{+j2 \pi f \tau} df
+\end{gather}
+
+Received complex low-pass equivalent signal:
+\begin{gather}
+    r(t) = \int_{-\infty}^\infty h(\tau,t) s(t-\tau) d\tau = \sum_{k=1}^{N(t)} \rho_k(t) e^{j \phi_k(t)} s(t - \tau_k(t)) \\
+    r(t) = \int_{-\infty}^\infty R(f,t) e^{j2 \pi ft}df
+\end{gather}
+
+Where:
+\begin{equation*}
+    R(f,t) = H(f,t) S(f)
+\end{equation*}
+
+    \subsubsection{Alternate Channel Descriptions}
+    We have time-variant impulse response and time-variant transfer function. We also have:
+    \begin{itemize}
+        \item Delay Doppler-spread function:
+        \begin{equation}
+            H(\tau,v) = F_\tau [h(\tau,t)] = \int_{-\infty}^\infty h(\tau,t) e^{-j2 \pi v t} dt
+        \end{equation}
+        \item Output Doppler-spread function:
+        \begin{equation}
+            H(f,v) = F_\tau [H(f,t)] = \int_{-\infty}^\infty H(f,t) e^{-j2 \pi v t} dt
+        \end{equation}
+    \end{itemize}
+    % TODO: Add diagram from Chapter 2, slide 28
+\subsection{Channel Correlation Functions}
+The autocorrelation function of $h(\tau,t)$ is:
+\begin{align}
+    \phi_h(\tau_1,\tau_2,t_1,t_2) &= \frac{1}{2} E \left[ h^*(\tau_1,t_1) h(\tau_2,t_2) \right] \label{eq_autocorrel} \\
+    &= \frac{1}{2} E \left[ h^*(\tau_1,t) h(\tau_2, t+\Delta t) \right] = \phi_h(\tau_1,\tau_2,\Delta t) \label{eq_autocorrel_WSS}\\
+    &= \phi_h (\tau_1,\Delta t) \delta(\tau_1 - \tau_2) \label{eq_autocorrel_WSSUS}\\
+    &= \phi_h (\tau,\Delta t) \delta(\Delta\tau) \label{eq_autocorrel_finalWSSUS}
+\end{align}
+
+Points to make:
+\begin{itemize}
+    \item We derive equation (\ref{eq_autocorrel_WSS}) from (\ref{eq_autocorrel}) for a wise-sense stationary WSS*$h(\tau,t)$, therefore $t_1 = t, t_2 = t + \Delta t$
+    \item Equation (\ref{eq_autocorrel_WSSUS}) is derived under the uncorrelated scattering function
+    \item Equation (\ref{eq_autocorrel_finalWSSUS}) by $\tau_1 = \tau, \tau_2 = \tau + \Delta\tau$
+\end{itemize}
+
