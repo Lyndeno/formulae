@@ -4,6 +4,9 @@
 
 \RequirePackage{multirow}
 \RequirePackage{titlesec}
+\RequirePackage[landscape,letterpaper, total={9.5in, 7in}]{geometry}
+\RequirePackage{amsmath}
+\RequirePackage{multicol}
 
 \newcommand{\formulatitle}[2]{
     {\noindent\huge \textbf{#1}} \\
