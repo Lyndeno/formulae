@@ -1,0 +1,81 @@
+\subsection{Cellular Concept}
+\begin{itemize}
+    \item $N$ -- Number of cells in each cluster (aka cluster size or frequency reuse factor)
+    \item $C$ -- Number of channels in each cell
+    \item $C_T$ -- Nummber of cells within a cluster. $C_T = C \cdot N$
+\end{itemize}
+
+\subsection{Co-Channel Reuse Factor and Interference}
+Co-channel Reuse factor
+\begin{equation}
+    q = \frac{D}{R} = \sqrt{3N}
+\end{equation}
+
+Signal-to-co-channel interference ratio (SIR):
+\begin{equation}
+    \frac{S}{I} = \frac{S}{\sum_{k=1}^{N_I} I_k}
+\end{equation}
+where:
+\begin{gather*}
+    S = \text{Desired Signal Power} \\
+    I_k = \text{power of co-channel interference from cell $k$}
+\end{gather*}
+
+Path loss:
+\begin{multicols*}{2}
+    \begin{equation}
+        L(d) = L(d_0) \left( \frac{d}{d_0} \right)^n
+    \end{equation}
+
+    \columnbreak
+
+    Where:
+    \begin{gather*}
+        d_0 = \text{reference distance}\\
+        n = \text{path loss exponent}
+    \end{gather*}
+\end{multicols*}
+
+\begin{gather}
+    \frac{S}{I} = \frac{S}{\sum_{k=1}^{N_I} I_k} = \frac{R^{-n}}{N_I \cdot D^{-n}} = \frac{(D/R)^n}{N_I}
+    = \frac{q^n}{N_I} = \frac{(\sqrt{3N})^n}{N_I} \\
+    \boxed{q = \left(N_I \cdot \frac{S}{I}\right)^{\frac{1}{n}}}
+\end{gather}
+
+\subsection{Grade of Service (GoS)}
+Basic definitions:
+
+\begin{tabular}{| c | c |}
+    \hline
+    $H$ & Average holding time\\
+    \hline
+    $A$ & Traffic intensity\\
+    \hline
+    $A_c$ & Traffic intensity per channel\\
+    \hline
+    $\lambda$ & Call request (arrival) rate\\
+    \hline    
+\end{tabular}
+
+Average traffic intensity per user (in Erlangs):
+\begin{multicols*}{2}
+    \begin{equation}
+        A_u = \lambda_u H
+    \end{equation}
+    
+    \columnbreak  
+    Where:
+    \begin{gather*}
+        \lambda_u = \text{call request rate per user}
+    \end{gather*}
+\end{multicols*}
+
+For a system with $u$ users:
+\begin{equation}
+    A = u A_u = u \lambda_u H = \lambda H
+\end{equation}
+
+In a C-channel trunked system, traffic intensity per channel:
+\begin{equation}
+    A_C = u A_u / C = \lambda H / C
+\end{equation}
