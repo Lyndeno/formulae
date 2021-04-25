@@ -1,12 +1,12 @@
 \documentclass{formulae}
 
-\usepackage[landscape,letterpaper, total={7in, 9.5in}]{geometry}
+\usepackage[landscape,letterpaper, total={9.5in, 7in}]{geometry}
 \usepackage{amsmath}
 \usepackage{multicol}
 
 \begin{document}
 \begin{multicols*}{2}
-    
+    \formulatitle{ECE 403 Formula Sheet}{Lyndon Sanche}
 
     \section{Chapter 9-10}
         \subsection{Sequencing}
@@ -63,7 +63,7 @@
             \end{tabular}
 
             \subsubsection{Clock Skew}
-            \begin{tabular}{| p{0.15\linewidth} | p{0.84\linewidth} |}
+            \begin{tabular}{| c | c |}
                 \hline
                 \multirow{2}{4em}{Flip-Flops} & $t_{pd} \leq T_c - (t_{setup} + t_{pcq} + t_{skew})$ \\
                 & $t_{cd} \geq t_{hold} - t_{ccq} + t_{skew}$\\
@@ -87,7 +87,7 @@
                 \hline
                 $T_w$ & Effective size of metastability window related to $t_{setup}$ + $t_{hold}$ of DFF \\
                 \hline
-                $f_{clock}$, $f_{data}$ & Asynchronous to clock\\
+                $f_{clock}$, $f_{data}$ & Asynchronous to clock \\
                 \hline
                 MTBF & Mean time between failure\\
                 \hline
