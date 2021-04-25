@@ -1,6 +1,6 @@
-ECE403.aux
-ECE403.fdb_latexmk
-ECE403.synctex.gz
-ECE403.pdf
-ECE403.log
-ECE403.fls
+*.aux
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
+*.log
+*.fls
