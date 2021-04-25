@@ -1,6 +1,6 @@
 \subsection{Delay Estimation}
     \subsubsection{Delay Definitions}
-    \begin{tabular}{| p{0.05\linewidth} | p{0.35\linewidth} | p{0.5\linewidth} |}
+    \begin{tabular}{| p{0.05\linewidth} | p{0.34\linewidth} | p{0.5\linewidth} |}
         \hline
         $t_{pdr}$ & Rising propagation delay & Time from input to \textbf{rising} output crossing $\frac{V_{DD}}{2}$\\
         \hline
@@ -12,4 +12,126 @@
         \hline
         $t_{f}$ & Fall time & Time between output crossing $0.8V_{DD}$ to $0.2V_{DD}$\\
         \hline
+        $t_{cdr}$ & Rising contamination delay & Time from input to \textbf{rising} output crossing $\frac{V_{DD}}{2}$\\
+        \hline
+        $t_{cdf}$ & Falling contamination delay & Time from input to \textbf{falling} output crossing $\frac{V_{DD}}{2}$\\
+        \hline
+        $t_{cd}$ & Contamination delay & $t_{cd} = \text{min}(t_{cdr},t_{cdf})$\\
+        \hline
     \end{tabular}
+
+    \subsubsection{Elmore Delay}
+    \begin{itemize}
+        \itemsep0em
+        \item ON transistors are treated like resistors
+        \item PU or PD networks modeled as RC ladders
+    \end{itemize}
+
+    Elmore Delay of RC ladder:
+
+    \begin{equation}
+        t_{pd} \approx \sum_{\text{nodes i}} R_{\text{i-to-source}}C_i
+    \end{equation}
+
+\subsection{Delay in a Logic Gate}
+Two parts of delay: $d = f + p$
+
+\begin{tabular}{| c | c | c |}
+    \hline
+    $f$ & Effort Delay & $f = gh$\\
+    \hline
+    $g$ & Logical Effort & Ability of gate to provide current\\
+    \hline
+    $h$ & Electrical Effort & $h = C_{out}/C_{in}$\\
+    \hline
+    $p$ & Parasitic Delay & Delay of gate driving no load\\
+    \hline
+\end{tabular}
+
+\subsection{Common Gates}
+    \subsubsection{Logical Effort of Common Gates}
+    \begin{tabular}{| c | c |}
+        \hline
+        Inverter & $1$\\
+        \hline
+        NAND & $(n + 2)/3$\\
+        \hline
+        NOR & $(2n + 1)/3$\\
+        \hline
+        Tristate/MUX& $2$\\
+        \hline
+        XOR, XNOR& Refer to Chapter 4, slide 45\\
+        \hline        
+    \end{tabular}
+
+    \subsubsection{Parasitic Delay of Common Gates}
+    In multiples of $p_{inv}$ ($\approx 1$)
+
+    \begin{tabular}{| c | c |}
+        \hline
+        Inverter & $1$\\
+        \hline
+        NAND & $n$\\
+        \hline
+        NOR & $n$\\
+        \hline
+        Tristate/MUX& $2n$\\
+        \hline
+        XOR, XNOR& Refer to Chapter 4, slide 46\\
+        \hline        
+    \end{tabular}
+
+\subsection{Multistage Logic Networks}
+\begin{itemize}
+    \itemsep0em
+    \item Path Logical Effort: $G = \prod g_i$
+    \item Path Electrical Effort: $H = \frac{C_{out-path}}{C_{in-path}}$
+    \item Path Effort: $F = \prod f_i = \prod g_i h_i$
+\end{itemize}
+
+    \subsubsection{Branching Effort}
+    \begin{equation}
+        b = \frac{C_{\text{on path}} + C_{\text{off path}}}{C_{on path}}
+    \end{equation}
+    \begin{equation}
+        B = \prod b_i
+    \end{equation}
+    \begin{equation}
+        \prod h_i = BH
+    \end{equation}
+
+Path effort:
+\begin{equation}
+    F = GBH
+\end{equation}
+    \subsubsection{Multistage Delays}
+    \begin{itemize}
+        \itemsep0em
+        \item Path effort delay: $D_F = \sum f_i$
+        \item Path parasitic delay: $P = \sum p_i$ 
+        \item Path delay: $D = \sum d_i = F_D + P$
+    \end{itemize}
+
+Optimize for fast circuits. $\bar{f} = g_ih_i = F^{\frac{1}{N}}$. Minimum delay of path with N stages:
+\begin{equation}
+    D = NF^{\frac{1}{N}} + P
+\end{equation}
+
+Calculating gate sizes:
+\begin{equation}
+    \bar{f} = gh = g \frac{C_{out}}{C_{in}}
+\end{equation}
+\begin{equation}
+    C_{in_i} = \frac{g_i C_{out_i}}{\bar{f}}
+\end{equation}
+
+\subsection{Method of Logical Effort}
+Steps to take:
+\begin{enumerate}
+    \item Compute path effort
+    \item Estimate best number of stages: $N = \log_4F$
+    \item Sketch path with N stages
+    \item Estimate least delay
+    \item Determine best stage effort
+    \item Find gate sizes
+\end{enumerate}

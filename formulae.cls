@@ -2,6 +2,13 @@
 \ProvidesClass{formulae}[2021/04/21 Lyndon Sanche Reumse Class]
 \LoadClass{article}
 
+\setlength\parindent{0pt}
+
+\setlength{\belowdisplayskip}{0pt} 
+\setlength{\belowdisplayshortskip}{0pt}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+
 \RequirePackage{multirow}
 \RequirePackage{titlesec}
 \RequirePackage[landscape,letterpaper, total={9.5in, 7in}]{geometry}
