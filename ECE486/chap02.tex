@@ -50,3 +50,32 @@ Points to make:
     \item Equation (\ref{eq_autocorrel_finalWSSUS}) by $\tau_1 = \tau, \tau_2 = \tau + \Delta\tau$
 \end{itemize}
 
+Multipath intensity profile or power delay profile of WSSUS channel:
+\begin{equation}
+    \phi_h(\tau) = \phi_h(\tau,\Delta t)|_{\Delta t = 0}
+\end{equation}
+
+\subsection{Delay Spread and Coherence Bandwidth}
+Mean (excess) propagation delay:
+\begin{equation}
+    \bar{\tau} = \frac
+    {\int_{-\infty}^\infty \tau \phi_h(\tau) d\tau}
+    {\int_{-\infty}^\infty \phi_h(\tau) d\tau}
+\end{equation}
+
+RMS delay spread:
+\begin{equation}
+    \sigma_\tau = \left[ \frac
+    {\int_{-\infty}^\infty (\tau - \bar{\tau})^2 \phi_h(\tau) d \tau}
+    {\int_{-\infty}^\infty \phi_h(\tau) d \tau}
+    \right]^\frac{1}{2}
+\end{equation}
+
+Usually assumed that $\tau_d = \sigma_\tau$.
+
+Coherence bandwidth $B_c$:
+\begin{gather}
+    \phi_h(\tau) \leftrightarrow \phi_H(\Delta f) \\
+    \tau_d = \sigma_\tau \propto 1/B_c \\
+    \text{Usually: } B_c \approx \frac{1}{5 \sigma_\tau} (\text{frequency correlation} > 0.5)
+\end{gather}
